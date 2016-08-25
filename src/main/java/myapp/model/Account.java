@@ -17,7 +17,8 @@ public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
 
 	@Temporal(TemporalType.DATE)
 	private Date birthdate;
@@ -45,7 +46,7 @@ public class Account implements Serializable {
 	public Account() {
 	}
 
-	public int getId() {
+	public long getId() {
 		return this.id;
 	}
 

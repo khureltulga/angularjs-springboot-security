@@ -71,7 +71,6 @@ angular
                         	  };
                         	  
                         	  $scope.credentials = {};
-                        	  $scope.user = {};
                         	  
                         	  var authenticate = function(credentials, callback) {
 
@@ -84,13 +83,14 @@ angular
                         		  $http.get('/user', {
                         			  headers : headers
                         		  }).success(function(data) {
-                        			  console.log(data);
                         			  if (data.name) {						
-                        				  //UIkit.notify("<i class='uk-icon-check'></i> Login success...", {status:'success',pos:'bottom-right',timeout: 0})
+                        				  UIkit.notify("<i class='uk-icon-check'></i> Амжилттай нэвтэрлээ.", {status:'success',pos:'bottom-right',timeout: 0})
                         				  $rootScope.user=data;
                         				  $rootScope.authenticated = true;
+                        				  $state.go('restricted.applications');
                         			  } else {
                         				  $rootScope.authenticated = false;
+                        				  UIkit.notify("<i class='uk-icon-check'></i> Амжилтгүй, нэвтрэх нэр эсвэл нууц үг буруу байна.", {status:'danger',pos:'bottom-right',timeout: 0})
                         			  }
                         			  callback && callback($rootScope.authenticated);
                         		  }).error(function() {
@@ -100,40 +100,39 @@ angular
 
                         	  }
                         	  
-                        	  authenticate();
+                        	  
+                        	  $http.get('/user').success(function(data) {
+                    			  if (data.name) {						
+                    				  //UIkit.notify("<i class='uk-icon-check'></i> Амжилттай нэвтэрлээ.", {status:'success',pos:'bottom-right',timeout: 0})
+                    				  $rootScope.user=data;
+                    				  $rootScope.authenticated = true;
+                    				  $state.go('restricted.applications');
+                    			  } else {
+                    				  $rootScope.authenticated = false;
+                    				  //UIkit.notify("<i class='uk-icon-check'></i> Амжилтгүй, нэвтрэх нэр эсвэл нууц үг буруу байна.", {status:'danger',pos:'bottom-right',timeout: 0})
+                    			  }
+                    		  }).error(function() {
+                    			  $rootScope.authenticated = false;
+                    			  callback && callback(false);
+                    		  });
                         	  
                         	  $scope.login = function() {
                         		  $rootScope.loggedout=false;
-                        		  console.log($scope.credentials);
                         		  authenticate($scope.credentials, function(authenticated) {
-                        			  
                         			  if (authenticated) {
-                        				  console.log("Login succeeded")
-
-
-                        				  var promise = $http.get("/izr/core/defaultSuccess").success(
-                        						  function (data) {
-                        							  var response = data;
-                        							  console.log(response);
-                        							  $state.go(response.url);
-                        							  // $state.go(response);
-                        						  })
-
-                        						  //	$state.go('restricted.forms.file_upload');					
-                        						  $scope.error = false;
+                        				  $state.go('restricted.applications');
+                        				  $scope.error = false;
                         				  localStorage.setItem("session", {});
                         				  $rootScope.authenticated = true;
                         			  } else {					
-
                         				  $scope.error = true;
-                        				  console.log("Login failed")
                         				  self.error = true;
                         				  $rootScope.authenticated = false;
                         			  }
                         		  })
                         	  };
                         	  
-                        	  $scope.register = function(){
+                        	  /*$scope.register = function(){
                         		  console.log($scope.user);
                         		  
                         		  $http({method: "POST", url: "/api/save", data: $scope.user}).
@@ -142,7 +141,7 @@ angular
                         	        }, function(response) {
                         	        	console.log(response);
                         	      });
-                        	  }
+                        	  }*/
 
                           }
                           ]);

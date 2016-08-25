@@ -9,7 +9,8 @@ var altairApp = angular.module('altairApp', [
     'ngSanitize',
     'ngRetina',
     'ncy-angular-breadcrumb',
-    'ConsoleLogger'
+    'ConsoleLogger',
+    'kendo.directives'
 ]);
 
 altairApp.constant('variables', {

@@ -7,7 +7,7 @@ altairApp
             // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
             $urlRouterProvider
                 .when('/dashboard', '/')
-                .otherwise('/');
+                .otherwise('/login');
 
             $stateProvider
             // -- ERROR PAGES --
@@ -64,41 +64,20 @@ altairApp
                         }]
                     }
                 })
-            // -- DASHBOARD --
-                .state("restricted.dashboard", {
+            // -- APPS --
+                .state("restricted.applications", {
                     url: "/",
-                    templateUrl: 'app/components/dashboard/dashboardView.html',
-                    controller: 'dashboardCtrl',
+                    templateUrl: 'app/views/application/applications.html',
+                    controller: 'applicationCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                // ocLazyLoad config (app/app.js)
-                                'lazy_countUp',
-                                'lazy_charts_peity',
-                                'lazy_charts_easypiechart',
-                                'lazy_charts_metricsgraphics',
-                                'lazy_charts_chartist',
-                                'lazy_weathericons',
-                                'lazy_clndr',
-                                'lazy_google_maps',
-                                'app/components/dashboard/dashboardController.js'
+                                'app/views/application/applications.js'
                             ], {serie: true} );
-                        }],
-                        sale_chart_data: function($http){
-                            return $http({method: 'GET', url: 'data/mg_dashboard_chart.min.json'})
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        },
-                        user_data: function($http){
-                            return $http({ method: 'GET', url: 'data/user_data.json' })
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        }
+                        }]
                     },
                     data: {
-                        pageTitle: 'Dashboard'
+                        pageTitle: 'Applications'
                     },
                     ncyBreadcrumb: {
                         label: 'Home'

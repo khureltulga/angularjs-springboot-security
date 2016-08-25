@@ -15,10 +15,17 @@ public class Application implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
 
 	@Column(name="appstore_id")
 	private String appstoreId;
+
+	@Override
+	public String toString() {
+		return "Application [id=" + id + ", appstoreId=" + appstoreId + ", description=" + description + ", image="
+				+ image + ", name=" + name + ", playstoreId=" + playstoreId + ", account=" + account + "]";
+	}
 
 	@Lob
 	private String description;
@@ -37,7 +44,7 @@ public class Application implements Serializable {
 	public Application() {
 	}
 
-	public int getId() {
+	public long getId() {
 		return this.id;
 	}
 
