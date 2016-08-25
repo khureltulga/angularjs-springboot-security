@@ -1,5 +1,6 @@
 package myapp.controller;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-
 import myapp.model.Account;
 import myapp.model.Application;
 import myapp.model.DataSourceResult;
@@ -77,16 +78,15 @@ public class AdminController {
 	public Object loadApps(@RequestParam(value = "search", required = false) String search, Pageable pageable) {
 		DataSourceResult datas = new DataSourceResult();
 		ApplicationSpecificationsBuilder builder = new ApplicationSpecificationsBuilder();
-		
+
 		if (search != null) {
-            final Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
-            final Matcher matcher = pattern.matcher(search + ",");
-            while (matcher.find()) {
-            	System.out.println(matcher.group(1) + matcher.group(2) + matcher.group(3));
-                builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
-            }
-        }
-		
+			final Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
+			final Matcher matcher = pattern.matcher(search + ",");
+			while (matcher.find()) {
+				builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
+			}
+		}
+
 		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
 		Page apps = ApplicationRepository.findAll(builder.build(),pageable);
 		for(Object a : apps.getContent()){
@@ -146,20 +146,35 @@ public class AdminController {
 
 	@ResponseBody
 	@RequestMapping(value="/api/applications",method=RequestMethod.PUT)
-	public Object updateApps(@RequestBody String jsonString) throws ClassNotFoundException {
+	public Object updateApps(@RequestBody String jsonString) throws ClassNotFoundException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, JSONException {
 		Account user = checkAuthenticated();
 		if (user != null){
-			Class<?> classtoConvert;
 			JSONObject obj = new JSONObject(jsonString);
-			classtoConvert=Class.forName("myapp.model.Application");
+			Class classTemp = Class.forName("myapp.model.Application");
+			//System.out.println(classTemp.getDeclaredFields());
+			//Object objTemp =classTemp.newInstance();
+			Field[] fields = classTemp.getDeclaredFields();
+			/*classtoConvert=Class.forName("myapp.model.Application");
 			Gson gson = new Gson();
 			Application object = (Application)gson.fromJson(obj.toString(),classtoConvert);
 			if (!ApplicationRepository.findOne(object.getId()).equals(null)){
 				object.setAccount(ApplicationRepository.findOne(object.getId()).getAccount());
+			}*/
+			Application u = null;
+			if (obj.has("id")){
+				u = ApplicationRepository.findOne(Long.parseLong(String.valueOf(obj.get("id"))));
+				if (u != null){
+					for(int i=0;i<obj.getNames(obj).length;i++){
+						for( Field field : fields ){
+							if (obj.has(field.getName())){
+								u.setField(field.getName(), obj.get(field.getName()));
+							}
+						}
+					}
+				}
+				ApplicationRepository.save(u);
 			}
-
-			dao.update(object);
-			return object;
+			return u;
 		}
 		else{
 			return null;

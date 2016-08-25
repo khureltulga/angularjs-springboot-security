@@ -1,6 +1,8 @@
 package myapp.model;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+
 import javax.persistence.*;
 
 
@@ -99,5 +101,10 @@ public class Application implements Serializable {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
-
+	
+	public void setField(String aFieldName, Object aValue) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+		Field aField = getClass().getDeclaredField(aFieldName);
+		aField.set(this, aValue);
+    }
+	
 }
