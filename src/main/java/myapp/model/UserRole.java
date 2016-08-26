@@ -19,11 +19,11 @@ public class UserRole implements Serializable {
 	private int id;
 
 	//bi-directional many-to-one association to Account
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Account account;
 
 	//bi-directional many-to-one association to Role
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Role role;
 
 	public UserRole() {

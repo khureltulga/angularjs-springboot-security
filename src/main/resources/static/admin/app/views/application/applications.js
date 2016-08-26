@@ -138,13 +138,7 @@ angular
                       required: true
                     }
                   },
-                  playstoreId: {
-                    type: "string",
-                    validation: {
-                      required: true
-                    }
-                  },
-                  appstoreId: {
+                  url: {
                     type: "string",
                     validation: {
                       required: true
@@ -192,16 +186,9 @@ angular
             width: "100px",
             filterable :false
           }, {
-            field: "playstoreId",
-            title: "PlayStore хаяг",
-            template: '<a href="#= playstoreId #" target="_blank">#= playstoreId #</a>',
-            filterable: {
-                cell: {showOperators: false}
-            }
-          }, {
-            field: "appstoreId",
-            title: "Appstore хаяг",
-            template: '<a href="#= appstoreId #" target="_blank">#= appstoreId #</a>',
+            field: "url",
+            title: "URL",
+            template: '<a href="#= url #" target="_blank">#= url #</a>',
             filterable: {
                 cell: {showOperators: false}
             }

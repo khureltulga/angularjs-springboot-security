@@ -39,6 +39,7 @@ import myapp.repository.AccountRepository;
 import myapp.repository.ApplicationRepository;
 import myapp.specification.ApplicationSpecification;
 import myapp.specification.ApplicationSpecificationsBuilder;
+import myapp.specification.MySpecificationBuilder;
 
 @Controller
 public class AdminController {
@@ -77,7 +78,7 @@ public class AdminController {
 	@RequestMapping(value="/api/applications",method=RequestMethod.GET)
 	public Object loadApps(@RequestParam(value = "search", required = false) String search, Pageable pageable) {
 		DataSourceResult datas = new DataSourceResult();
-		ApplicationSpecificationsBuilder builder = new ApplicationSpecificationsBuilder();
+		MySpecificationBuilder builder = new MySpecificationBuilder("myapp.model.Application");
 
 		if (search != null) {
 			final Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
@@ -88,7 +89,7 @@ public class AdminController {
 		}
 
 		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
-		Page apps = ApplicationRepository.findAll(builder.build(),pageable);
+		Page apps = ApplicationRepository.findAll((Specification<Application>)builder.build(),pageable);
 		for(Object a : apps.getContent()){
 			Map<String,Object> temp=new HashMap<String, Object>(); 
 			Application app = (Application) a;
@@ -96,8 +97,7 @@ public class AdminController {
 			temp.put("name", app.getName());
 			temp.put("description", app.getDescription());
 			temp.put("image", app.getImage());
-			temp.put("playstoreId", app.getPlaystoreId());
-			temp.put("appstoreId", app.getAppstoreId());
+			temp.put("url", app.getUrl());
 			result.add(temp);
 		}
 		datas.setData(result);
@@ -133,10 +133,16 @@ public class AdminController {
 			JSONObject obj = new JSONObject(jsonString);
 			classtoConvert=Class.forName("myapp.model.Application");
 			Gson gson = new Gson();
-			Application object = (Application)gson.fromJson(obj.toString(),classtoConvert);
-			object.setAccount(user);
-			ApplicationRepository.save(object);
-			return object;
+			Application app = (Application)gson.fromJson(obj.toString(),classtoConvert);
+			app.setAccount(user);
+			ApplicationRepository.save(app);
+			Map<String,Object> temp=new HashMap<String, Object>(); 
+			temp.put("id", app.getId());
+			temp.put("name", app.getName());
+			temp.put("description", app.getDescription());
+			temp.put("image", app.getImage());
+			temp.put("url", app.getUrl());
+			return temp;
 		}
 		else{
 			return null;
@@ -160,21 +166,28 @@ public class AdminController {
 			if (!ApplicationRepository.findOne(object.getId()).equals(null)){
 				object.setAccount(ApplicationRepository.findOne(object.getId()).getAccount());
 			}*/
-			Application u = null;
+			Application app = null;
 			if (obj.has("id")){
-				u = ApplicationRepository.findOne(Long.parseLong(String.valueOf(obj.get("id"))));
-				if (u != null){
+				app = ApplicationRepository.findOne(Long.parseLong(String.valueOf(obj.get("id"))));
+				if (app != null){
 					for(int i=0;i<obj.getNames(obj).length;i++){
 						for( Field field : fields ){
 							if (obj.has(field.getName())){
-								u.setField(field.getName(), obj.get(field.getName()));
+								app.setField(field.getName(), obj.get(field.getName()));
 							}
 						}
 					}
 				}
-				ApplicationRepository.save(u);
+				ApplicationRepository.save(app);
+				Map<String,Object> temp=new HashMap<String, Object>(); 
+				temp.put("id", app.getId());
+				temp.put("name", app.getName());
+				temp.put("description", app.getDescription());
+				temp.put("image", app.getImage());
+				temp.put("url", app.getUrl());
+				return temp;
 			}
-			return u;
+			return null;
 		}
 		else{
 			return null;

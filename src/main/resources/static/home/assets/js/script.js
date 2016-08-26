@@ -1664,7 +1664,7 @@ window.Modernizr = function(e, t, n) {
             duration: 400
         })
     })
-}(jQuery); + function(i) {
+}/*(jQuery); + function(i) {
     "use strict";
     i.FlickrFeed = function(t) {
         var e, s = this;
@@ -1704,7 +1704,7 @@ window.Modernizr = function(e, t, n) {
             })
         })
     }
-}
+}*/
 (jQuery); + function(t) {
     "use strict";
     t("iframe").each(function() {

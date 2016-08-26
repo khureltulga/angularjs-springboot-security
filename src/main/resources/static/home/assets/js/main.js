@@ -22,7 +22,7 @@ jQuery(function($){
 		$(thumbs[getRandomInt(0,thumbs.length)]).trigger('rotate');
 	},3000);
 
-	function triggerEvent(elem,fn,offset){
+	/*function triggerEvent(elem,fn,offset){
 		var top = elem.offset().top;
 		if((top-offset)<$(window).scrollTop()){
 			fn(elem);
@@ -64,7 +64,7 @@ jQuery(function($){
 				 elem.addClass('navbar-fixed-top');
 				 $('#header').css('margin-bottom',$('#navbar').height());
 				},0)
-	});
+	});*/
 
 	//Window on resize event
 	//------------------------------------------------

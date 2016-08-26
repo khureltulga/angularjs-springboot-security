@@ -20,13 +20,13 @@ public class Application implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 
-	@Column(name="appstore_id")
-	private String appstoreId;
+	@Column(name="url")
+	private String url;
 
 	@Override
 	public String toString() {
-		return "Application [id=" + id + ", appstoreId=" + appstoreId + ", description=" + description + ", image="
-				+ image + ", name=" + name + ", playstoreId=" + playstoreId + ", account=" + account + "]";
+		return "Application [id=" + id + ", url=" + url + ", description=" + description + ", image="
+				+ image + ", name=" + name + ", account=" + account + "]";
 	}
 
 	@Lob
@@ -36,11 +36,8 @@ public class Application implements Serializable {
 
 	private String name;
 
-	@Column(name="playstore_id")
-	private String playstoreId;
-
 	//bi-directional many-to-one association to Account
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Account account;
 
 	public Application() {
@@ -52,14 +49,6 @@ public class Application implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getAppstoreId() {
-		return this.appstoreId;
-	}
-
-	public void setAppstoreId(String appstoreId) {
-		this.appstoreId = appstoreId;
 	}
 
 	public String getDescription() {
@@ -86,16 +75,17 @@ public class Application implements Serializable {
 		this.name = name;
 	}
 
-	public String getPlaystoreId() {
-		return this.playstoreId;
-	}
-
-	public void setPlaystoreId(String playstoreId) {
-		this.playstoreId = playstoreId;
-	}
 
 	public Account getAccount() {
 		return this.account;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public void setAccount(Account account) {

@@ -36,11 +36,11 @@ public class Account implements Serializable {
 	private String username;
 
 	//bi-directional many-to-one association to UserRole
-	@OneToMany(mappedBy="account")
+	@OneToMany(mappedBy="account",fetch = FetchType.EAGER)
 	private List<UserRole> userRoles;
 
 	//bi-directional many-to-one association to Application
-	@OneToMany(mappedBy="account")
+	@OneToMany(mappedBy="account",fetch = FetchType.EAGER)
 	private List<Application> applications;
 
 	public Account() {
