@@ -13,5 +13,6 @@ app.controller('mainCtrl', function($scope, $window, $http){
     $scope.open = function(url) {
         $window.open(url);
       };
-
+      
+      
 });

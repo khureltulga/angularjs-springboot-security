@@ -7,6 +7,7 @@ angular
     '$timeout',
     function($scope, $rootScope, $state, $timeout) {
       if ($rootScope.authenticated) {
+    	var selected_image = null;
         $scope.pmenuGrid = {
           dataSource: {
 
@@ -16,11 +17,34 @@ angular
                 contentType: "application/json; charset=UTF-8",
                 type: "GET"
               },
-              update: {
+              /*update: {
                 url: "/api/applications",
                 contentType: "application/json; charset=UTF-8",
-                type: "PUT"
-              },
+                type: "PUT",
+                data: 
+              },*/
+              update: function(options) {
+                  alert(1);
+                  // make JSONP request to http://demos.kendoui.com/service/products/update
+                  console.log(options);
+                  $.ajax( {
+                    url: "/api/applications",
+                    dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+                    // send the updated data items as the "models" service parameter encoded in JSON
+                    data: {
+                      models: kendo.stringify(options.data.models)
+                    },
+                    success: function(result) {
+                      // notify the data source that the request succeeded
+
+                      options.success(result);
+                    },
+                    error: function(result) {
+                      // notify the data source that the request failed
+                      options.error(result);
+                    }
+                  });
+                },
               destroy: {
                 url: "/api/applications",
                 contentType: "application/json; charset=UTF-8",
@@ -184,7 +208,8 @@ angular
             title: "Зураг",
             template: '<img src="#= image #" alt="image" />',
             width: "100px",
-            filterable :false
+            filterable :false,
+            editor: fileUploadEditor
           }, {
             field: "url",
             title: "URL",
@@ -199,6 +224,18 @@ angular
           }],
           editable: "popup"
         }
+        
+        
+        
+        
+        function fileUploadEditor(container, options) {
+            $('<input id="image_chooser_selector" type="file" multiple="false" class="dropify" accept="image/*" data-default-file="'+options.model.image+'" required name="' + options.field + '" />')
+                .appendTo(container);
+            
+            $('.dropify').dropify();
+        }
+        
+        //selected_image
       } else {
         $state.go('login');
       }

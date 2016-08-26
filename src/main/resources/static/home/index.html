@@ -43,8 +43,8 @@
 						<div class="slogan brick3 transparent text-center">
 							<div class="inner">
 								<a href="/admin/" target="_blank" style="width: 100%;float: left;text-align: right;">Системд нэвтрэх</a>
-								<h3><b>Нийслэлийн тусгай зөвшөөрлийн цахим систем</b></h3>
-								<a href="#" style="color: black"> www.license.ulaanbaatar.mn</a>
+								<h3><b>Бүртгэлийн цахим систем</b></h3>
+								<!-- <a href="#" style="color: black"> www.license.ulaanbaatar.mn</a> -->
 							</div>
 
 						</div>
@@ -53,8 +53,8 @@
 						<div class="slogan brick3 transparent text-right">
 							<div class="inner">
 								<h4>Сайн байна уу? Таньд энэ өдрийн мэндийг хүргэе.</h4>
-								<p>Та нийслэлийн "Иргэдэд нээлттэй цахим засаглал хөгжүүлэх" хөтөлбөрийн хүрээнд хийгдэж буй
-									<a href="#" style="color: #2d62a0"> НИЙСЛЭЛИЙН ТУСГАЙ ЗӨВШӨӨРЛИЙН ЦАХИМ СИСТЕМ </a> - ийг ашиглаж байна.</p>
+								<!-- <p>Та нийслэлийн "Иргэдэд нээлттэй цахим засаглал хөгжүүлэх" хөтөлбөрийн хүрээнд хийгдэж буй
+									<a href="#" style="color: #2d62a0"> НИЙСЛЭЛИЙН ТУСГАЙ ЗӨВШӨӨРЛИЙН ЦАХИМ СИСТЕМ </a> - ийг ашиглаж байна.</p> -->
 							</div>
 
 						</div>
@@ -66,7 +66,7 @@
 					</div>
 
 					<div class="brow">
-						<div ng=title="{{app.description}}" class="brick1" ng-repeat="app in apps.data" ng-class="{even: $even, odd: $odd}" ng-click="open(app.url)" style="cursor:pointer">
+						<div ng-attr-title="{{app.description}}" class="brick1" ng-repeat="app in apps.data" ng-class="{odd: $odd, even: $even}" ng-click="open(app.url)" style="cursor:pointer">
 							<div class="nav-item">
 								<div class="nav-hover"></div>
 								

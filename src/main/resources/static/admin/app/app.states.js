@@ -72,6 +72,7 @@ altairApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                                'lazy_dropify',
                                 'app/views/application/applications.js'
                             ], {serie: true} );
                         }]
