@@ -17,34 +17,11 @@ angular
                 contentType: "application/json; charset=UTF-8",
                 type: "GET"
               },
-              /*update: {
+              update: {
                 url: "/api/applications",
                 contentType: "application/json; charset=UTF-8",
-                type: "PUT",
-                data: 
-              },*/
-              update: function(options) {
-                  alert(1);
-                  // make JSONP request to http://demos.kendoui.com/service/products/update
-                  console.log(options);
-                  $.ajax( {
-                    url: "/api/applications",
-                    dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-                    // send the updated data items as the "models" service parameter encoded in JSON
-                    data: {
-                      models: kendo.stringify(options.data.models)
-                    },
-                    success: function(result) {
-                      // notify the data source that the request succeeded
-
-                      options.success(result);
-                    },
-                    error: function(result) {
-                      // notify the data source that the request failed
-                      options.error(result);
-                    }
-                  });
-                },
+                type: "PUT"
+              },
               destroy: {
                 url: "/api/applications",
                 contentType: "application/json; charset=UTF-8",
@@ -224,21 +201,35 @@ angular
           }],
           editable: "popup"
         }
-        
-        
-        
-        
+               
         function fileUploadEditor(container, options) {
-            $('<input id="image_chooser_selector" type="file" multiple="false" class="dropify" accept="image/*" data-default-file="'+options.model.image+'" required name="' + options.field + '" />')
+        	$('<input type="text" class="k-input k-textbox" name="'+ options.field +'" required="required" data-bind="value:'+ options.field +'">').appendTo(container);
+            $('<input id="image_chooser_selector" type="file" name="file" multiple="false" accept="image/*" />')
                 .appendTo(container);
-            
-            $('.dropify').dropify();
+
+            $("#image_chooser_selector").kendoUpload({
+                async: {
+                    saveUrl: "/api/upload_image",
+                    removeUrl: "remove",
+                    autoUpload: true
+                },
+                multiple: false,
+                showFileList: false,
+                success: function(e){
+                	
+                	//var win = $(this).closest("[data-role=window]");
+                    var uid = $("div[data-uid]").data("uid");
+                    //console.log(uid);
+                	//var input = $("[name='image']", win); 
+                	$("input[data-bind='value:image']").val(e.response.result);
+                    //input.val(e.response.result);
+                    var model = $(".k-grid").data("kendoGrid").dataSource.getByUid(uid);
+                    model.set('image',e.response.result);
+                }
+            });
         }
-        
-        //selected_image
       } else {
         $state.go('login');
       }
-
     }
   ]);

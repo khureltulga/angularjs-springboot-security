@@ -4,6 +4,7 @@
 *#
 *~
 /build
+src/main/resources/static/images/*.*
 /code
 .classpath
 .project

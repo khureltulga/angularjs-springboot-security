@@ -19,11 +19,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	
 	@Autowired
 	@Qualifier("userDetailsService")
@@ -61,4 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           .and()
 			.csrf().disable();
     }
+    
+    
 }

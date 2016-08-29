@@ -1,6 +1,10 @@
 package myapp.controller;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import myapp.model.Account;
@@ -43,6 +50,8 @@ import myapp.specification.MySpecificationBuilder;
 
 @Controller
 public class AdminController {
+	public static final String ROOT = "src/main/resources/static/images";
+	
 	@Autowired
 	ApplicationRepository ApplicationRepository;
 
@@ -212,5 +221,19 @@ public class AdminController {
 			return HttpStatus.BAD_REQUEST;
 		}
 
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/api/upload_image",method = RequestMethod.POST)
+	public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+		if (!file.isEmpty()) {
+			String filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			Files.copy(file.getInputStream(), Paths.get(ROOT, filename));
+			JSONObject result = new JSONObject();
+			result.put("result", "/images/"+filename);
+			return result.toString();
+		} else {
+			return null;
+		}
 	}
 }
