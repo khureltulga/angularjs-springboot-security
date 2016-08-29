@@ -49,7 +49,7 @@ angular
                     size: options.pageSize,
                     page: options.page - 1
                   };
-                  console.log(options);
+                  //console.log(options);
                   if (options.sort != null && options.sort.length > 0) {
                 	  paging.sort = options.sort[0].field + "," + options.sort[0].dir;
                   }
@@ -184,7 +184,7 @@ angular
           }, {
             field: "image",
             title: "Зураг",
-            template: '<img src="#= image #" alt="image" />',
+            template: '<a href="#= image #" data-uk-lightbox title="#= name #"><img src="#= image #" alt="image" /></a>',
             width: "100px",
             filterable :false,
             editor: fileUploadEditor

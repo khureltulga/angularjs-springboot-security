@@ -43,7 +43,7 @@
 						<div class="slogan brick3 transparent text-center">
 							<div class="inner">
 								<a href="/admin/" target="_blank" style="width: 100%;float: left;text-align: right;">Системд нэвтрэх</a>
-								<h3><b>Бүртгэлийн цахим систем</b></h3>
+								<h3><b>{{settings.siteTitle}}</b></h3>
 								<!-- <a href="#" style="color: black"> www.license.ulaanbaatar.mn</a> -->
 							</div>
 
@@ -52,7 +52,7 @@
 					<div class="brow">
 						<div class="slogan brick3 transparent text-right">
 							<div class="inner">
-								<h4>Сайн байна уу? Таньд энэ өдрийн мэндийг хүргэе.</h4>
+								<h4>{{settings.siteDescription}}</h4>
 								<!-- <p>Та нийслэлийн "Иргэдэд нээлттэй цахим засаглал хөгжүүлэх" хөтөлбөрийн хүрээнд хийгдэж буй
 									<a href="#" style="color: #2d62a0"> НИЙСЛЭЛИЙН ТУСГАЙ ЗӨВШӨӨРЛИЙН ЦАХИМ СИСТЕМ </a> - ийг ашиглаж байна.</p> -->
 							</div>
@@ -66,7 +66,7 @@
 					</div>
 
 					<div class="brow">
-						<div ng-attr-title="{{app.description}}" class="brick1" ng-repeat="app in apps.data" ng-class="{odd: $odd, even: $even}" ng-click="open(app.url)" style="cursor:pointer">
+						<div ng-attr-title="{{app.name}}" class="brick1" ng-repeat="app in apps.data" ng-class="{odd: $odd, even: $even}" ng-click="openPopup(app)" style="cursor:pointer">
 							<div class="nav-item">
 								<div class="nav-hover"></div>
 								
@@ -90,22 +90,39 @@
 			</div>
 			<div class="slogan brick1 text-center odd">
 				<div class="inner">
-					<h3><b>Нийслэлийн тусгай зөвшөөрлийн цахим систем</b></h3>
-					<a href="#" style="color: black"> www.license.ulaanbaatar.mn</a>
+					<h3><b>{{settings.copyright}}</b></h3>
+					<a ng-href="{{settings.copyright_link}}" style="color: black"> {{settings.copyright_link}}</a>
 				</div>
 			</div>
 			
 		</div>
 	</div>
 </header> <!-- End header -->
-
+<div class="modal fade" id="appDetailModal" tabindex="-1" role="dialog" aria-labelledby="appDetailModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" style="color: #fff;">{{app.name}}</h4>
+      </div>
+      <div class="modal-body" style="white-space: pre-line;">
+      	<img ng-src="{{app.image}}" ng-if="app.image.length > 0" align="left" style="max-width:30%;margin-right: 15px;">
+       {{app.description}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Хаах</button>
+        <button type="button" class="btn btn-primary" ng-click="open(app.url)">Зочлох</button>
+      </div>
+    </div>
+  </div>
+</div>
 <a href="#" id="btn_up">UP</a>
 <footer id="footer">
 	<div class="container">
-		Монгол улсын нийслэл Улаанбаатар хот &copy; 2015 Зохиогчийн эрх хуулиар хамгаалагдсан.
+		{{settings.copyright}}
 		<span class="pull-right">
-			<span class="icon-phone"> (+976) 1132 5170 &nbsp;&nbsp;&nbsp; </span>
-			<span class="li_mail"> info@license.ulaanbaatar.mn</span>
+			<span class="icon-phone"> {{settings.tel}} &nbsp;&nbsp;&nbsp; </span>
+			<span class="li_mail"> {{settings.email}}</span>
 		</span>
 
 	</div>

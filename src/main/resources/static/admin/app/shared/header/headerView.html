@@ -3,7 +3,7 @@
         <div class="header_main_content">
             <nav class="uk-navbar">
                 <div class="main_logo_top" ng-if="topMenuActive || fullHeaderActive">
-                    <a ui-sref="restricted.dashboard"><img ng-src="assets/img/logo_main_white.png" alt="" add-image-prop/></a>
+                    <a ui-sref="restricted.applications"><img ng-src="assets/img/logo_main_white.png" alt="" add-image-prop/></a>
                 </div>
                 <!-- main sidebar switch -->
                 <sidebar-primary-toggle></sidebar-primary-toggle>
@@ -110,9 +110,9 @@
                             <a href="#" class="user_action_image"><img class="md-user-image" ng-src="{{user_data.avatar}}" alt="" add-image-prop/></a>
                             <div class="uk-dropdown uk-dropdown-small">
                                 <ul class="uk-nav js-uk-prevent">
-                                    <li><a ui-sref="restricted.pages.user_profile">My profile</a></li>
-                                    <li><a ui-sref="restricted.pages.settings">Settings</a></li>
-                                    <li><a href="/logout">Logout</a></li>
+                                    <!-- <li><a ui-sref="restricted.pages.user_profile">My profile</a></li> -->
+                                    <li><a ui-sref="restricted.pages.settings">Тохиргоо</a></li>
+                                    <li><a href="/logout">Гарах</a></li>
                                 </ul>
                             </div>
                         </li>

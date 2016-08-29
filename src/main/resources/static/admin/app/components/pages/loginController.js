@@ -84,17 +84,18 @@ angular
                         			  headers : headers
                         		  }).success(function(data) {
                         			  if (data.name) {						
-                        				  UIkit.notify("<i class='uk-icon-check'></i> Амжилттай нэвтэрлээ.", {status:'success',pos:'bottom-right',timeout: 0})
+                        				  UIkit.notify("<i class='uk-icon-check'></i> Амжилттай нэвтэрлээ.", {status:'success',pos:'bottom-right',timeout: 2000})
                         				  $rootScope.user=data;
                         				  $rootScope.authenticated = true;
                         				  $state.go('restricted.applications');
                         			  } else {
                         				  $rootScope.authenticated = false;
-                        				  UIkit.notify("<i class='uk-icon-check'></i> Амжилтгүй, нэвтрэх нэр эсвэл нууц үг буруу байна.", {status:'danger',pos:'bottom-right',timeout: 0})
+                        				  UIkit.notify("<i class='uk-icon-check'></i> Амжилтгүй, нэвтрэх нэр эсвэл нууц үг буруу байна.", {status:'danger',pos:'bottom-right',timeout: 2000})
                         			  }
                         			  callback && callback($rootScope.authenticated);
                         		  }).error(function() {
                         			  $rootScope.authenticated = false;
+                        			  UIkit.notify("<i class='uk-icon-check'></i> Амжилтгүй, нэвтрэх нэр эсвэл нууц үг буруу байна.", {status:'danger',pos:'bottom-right',timeout: 2000});
                         			  callback && callback(false);
                         		  });
 
