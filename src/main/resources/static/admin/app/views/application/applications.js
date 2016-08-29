@@ -204,7 +204,7 @@ angular
         }
                
         function fileUploadEditor(container, options) {
-        	$('<input type="text" class="k-input k-textbox" name="'+ options.field +'" required="required" data-bind="value:'+ options.field +'">').appendTo(container);
+        	$('<input readonly type="text" class="k-input k-textbox" name="'+ options.field +'" required="required" data-bind="value:'+ options.field +'">').appendTo(container);
             $('<input id="image_chooser_selector" type="file" name="file" multiple="false" accept="image/*" />')
                 .appendTo(container);
 

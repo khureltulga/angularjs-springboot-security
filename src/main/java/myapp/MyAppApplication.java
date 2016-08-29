@@ -24,10 +24,10 @@ public class MyAppApplication{
 	@Bean
 	CommandLineRunner init() {
 		return (args) -> {
-            FileSystemUtils.deleteRecursively(new File(AdminController.ROOT));
-
-            Files.createDirectory(Paths.get(AdminController.ROOT));
+            //FileSystemUtils.deleteRecursively(new File(AdminController.ROOT));
+            if (!new File(AdminController.ROOT).exists()){
+            	Files.createDirectory(Paths.get(AdminController.ROOT));
+            }
 		};
 	}
-	
 }

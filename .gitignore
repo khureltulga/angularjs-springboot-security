@@ -4,7 +4,7 @@
 *#
 *~
 /build
-src/main/wepapp/images/*.*
+src/main/webapp/images/*.*
 /code
 .classpath
 .project
