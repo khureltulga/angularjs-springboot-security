@@ -50,7 +50,7 @@ import myapp.specification.MySpecificationBuilder;
 
 @Controller
 public class AdminController {
-	public static final String ROOT = "src/main/resources/static/images";
+	public static final String ROOT = "src/main/webapp/images";
 	
 	@Autowired
 	ApplicationRepository ApplicationRepository;
@@ -87,7 +87,8 @@ public class AdminController {
 	@RequestMapping(value="/api/applications",method=RequestMethod.GET)
 	public Object loadApps(@RequestParam(value = "search", required = false) String search, Pageable pageable) {
 		DataSourceResult datas = new DataSourceResult();
-		MySpecificationBuilder builder = new MySpecificationBuilder("myapp.model.Application");
+		System.out.println(pageable.toString());
+		ApplicationSpecificationsBuilder builder = new ApplicationSpecificationsBuilder();
 
 		if (search != null) {
 			final Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
@@ -98,7 +99,7 @@ public class AdminController {
 		}
 
 		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
-		Page apps = ApplicationRepository.findAll((Specification<Application>)builder.build(),pageable);
+		Page apps = ApplicationRepository.findAll((ApplicationSpecification)builder.build(),pageable);
 		for(Object a : apps.getContent()){
 			Map<String,Object> temp=new HashMap<String, Object>(); 
 			Application app = (Application) a;

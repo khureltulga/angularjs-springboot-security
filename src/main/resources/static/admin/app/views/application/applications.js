@@ -47,8 +47,9 @@ angular
                   //console.log(options);
                   var paging = {
                     size: options.pageSize,
-                    number: options.page
+                    page: options.page - 1
                   };
+                  console.log(options);
                   if (options.sort != null && options.sort.length > 0) {
                 	  paging.sort = options.sort[0].field + "," + options.sort[0].dir;
                   }
