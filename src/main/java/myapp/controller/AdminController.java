@@ -1,5 +1,8 @@
 package myapp.controller;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URI;
@@ -221,7 +224,32 @@ public class AdminController {
 		else{
 			return HttpStatus.BAD_REQUEST;
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/api/save_settings",method=RequestMethod.POST)
+	public HttpStatus saveSettings(@RequestBody String jsonString) throws ClassNotFoundException, IOException {
+		Account user = checkAuthenticated();
+		if (user != null){
+			
+			JSONObject obj = new JSONObject(jsonString);
+			//System.out.println(jsonString);
+			File file = new File("src/main/resources/static/config.json");
 
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(jsonString);
+			bw.close();
+			return HttpStatus.OK;
+		}
+		else{
+			return HttpStatus.BAD_REQUEST;
+		}
 	}
 	
 	@ResponseBody

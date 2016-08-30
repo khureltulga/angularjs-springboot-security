@@ -4684,6 +4684,7 @@ button.close {
   padding: 15px 15px;
   color: white;
   border-bottom: 1px solid #eee;
+  font-family: 'Roboto Condensed';
 }
 .modal-header h3 {
   color: white;
@@ -4747,6 +4748,12 @@ button.close {
 .modal-footer .btn-block + .btn-block {
   margin-left: 0;
 }
+
+.btn{
+    font-family: "Roboto Condensed" !important;
+    padding: 5px 10px;
+}
+
 .tooltip {
   position: absolute;
   z-index: 1030;
@@ -7440,14 +7447,14 @@ blockquote p {
 
 #btn_up {
   color: #fff;
-  width: 50px;
+  width: 65px;
   height: 50px;
   background: #339adf;
   position: fixed;
   text-transform: uppercase;
-  font-family: 'BebasNeueRegular', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   line-height: 50px;
-  font-size: 28px;
+  font-size: 20px;
   text-align: center;
   top: 80%;
   right: 5%;

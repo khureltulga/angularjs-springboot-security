@@ -9,6 +9,7 @@
     <title>Нүүр хуудас</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,300italic' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=cyrillic-ext" rel="stylesheet">
     <link rel="stylesheet" href="/home/assets/css/style.css" type="text/css" media="all" >
     <link rel="stylesheet" href="/home/assets/css/responsive.css" type="text/css" media="all" >
     <link rel="stylesheet" href="/home/assets/css/jquery.mCustomScrollbar.css" type="text/css" media="all" >
@@ -41,8 +42,9 @@
 							</div>
 						</div>
 						<div class="slogan brick3 transparent text-center">
+							<a href="/admin/" target="_blank" style="width: 100%;float: left;text-align: right;color: #5dbbf9;font-family: 'Roboto Condensed';text-transform: uppercase;">Системд нэвтрэх</a>
 							<div class="inner">
-								<a href="/admin/" target="_blank" style="width: 100%;float: left;text-align: right;">Системд нэвтрэх</a>
+								
 								<h3><b>{{settings.siteTitle}}</b></h3>
 								<!-- <a href="#" style="color: black"> www.license.ulaanbaatar.mn</a> -->
 							</div>
@@ -66,7 +68,7 @@
 					</div>
 
 					<div class="brow">
-						<div ng-attr-title="{{app.name}}" class="brick1" ng-repeat="app in apps.data" ng-class="{odd: $odd, even: $even}" ng-click="openPopup(app)" style="cursor:pointer">
+						<div ng-attr-title="{{app.name}}" class="brick1" ng-repeat="app in apps" ng-class="{odd: $odd, even: $even}" ng-click="openPopup(app)" style="cursor:pointer">
 							<div class="nav-item">
 								<div class="nav-hover"></div>
 								
@@ -74,8 +76,8 @@
 								<span>{{app.name}}</span>
 							</div>
 						</div>
-
 					</div>
+					<div class="brow"><center><button type="button" class="btn btn-default" style="margin-top:15px;" ng-click="loadMore()" ng-if="total > apps.length">Цааш</button></center></div>
 
 				</div>
 				<div class="span1"></div>
@@ -116,7 +118,7 @@
     </div>
   </div>
 </div>
-<a href="#" id="btn_up">UP</a>
+<a href="#" id="btn_up">ДЭЭШ</a>
 <footer id="footer">
 	<div class="container">
 		{{settings.copyright}}
