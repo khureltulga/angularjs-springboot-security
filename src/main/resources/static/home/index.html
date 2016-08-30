@@ -45,7 +45,7 @@
 							<a href="/admin/" target="_blank" style="width: 100%;float: left;text-align: right;color: #5dbbf9;font-family: 'Roboto Condensed';text-transform: uppercase;">Системд нэвтрэх</a>
 							<div class="inner">
 								
-								<h3><b>{{settings.siteTitle}}</b></h3>
+								<h2 style="font-family: 'Roboto Condensed';text-transform: uppercase;"><b>{{settings.siteTitle}}</b></h2>
 								<!-- <a href="#" style="color: black"> www.license.ulaanbaatar.mn</a> -->
 							</div>
 
@@ -67,7 +67,7 @@
 						</div>
 					</div>
 
-					<div class="brow">
+					<div class="brow" infinite-scroll="loadMore()" infinite-scroll-distance="1">
 						<div ng-attr-title="{{app.name}}" class="brick1" ng-repeat="app in apps" ng-class="{odd: $odd, even: $even}" ng-click="openPopup(app)" style="cursor:pointer">
 							<div class="nav-item">
 								<div class="nav-hover"></div>
@@ -77,7 +77,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="brow"><center><button type="button" class="btn btn-default" style="margin-top:15px;" ng-click="loadMore()" ng-if="total > apps.length">Цааш</button></center></div>
+					<!-- <div class="brow"><center><button type="button" class="btn btn-default" style="margin-top:15px;" ng-click="loadMore()" ng-if="total > apps.length">Цааш</button></center></div> -->
 
 				</div>
 				<div class="span1"></div>
@@ -92,8 +92,8 @@
 			</div>
 			<div class="slogan brick1 text-center odd">
 				<div class="inner">
-					<h3><b>{{settings.copyright}}</b></h3>
-					<a ng-href="{{settings.copyright_link}}" style="color: black"> {{settings.copyright_link}}</a>
+					<h3><b>{{settings.siteTitle}}</b></h3>
+					<a style="color: black"> {{settings.siteDescription}}</a>
 				</div>
 			</div>
 			
@@ -105,11 +105,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel" style="color: #fff;">{{app.name}}</h4>
+        <h4 class="modal-title" id="myModalLabel" style="color: #fff;font-family: 'Roboto Condensed';">{{app.name}}</h4>
       </div>
       <div class="modal-body" style="white-space: pre-line;">
       	<img ng-src="{{app.image}}" ng-if="app.image.length > 0" align="left" style="max-width:30%;margin-right: 15px;">
-       {{app.description}}
+       	<p ng-bind="app.description"/>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Хаах</button>
@@ -146,6 +146,7 @@
 <script src="/home/assets/js/jquery.isotope.min.js"></script>
 <script src="/home/assets/js/jquery.scrollUp.js"></script>
 <script src="/home/assets/js/main.js"></script>
+<script src="/home/assets/js/ng-infinite-scroll.min.js"></script>
 
 <script type="text/javascript">
 

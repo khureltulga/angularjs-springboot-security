@@ -67,6 +67,12 @@ angular
                     title: 'Эхлэл',
                     icon: '&#xE871;',
                     link: 'restricted.applications'
+                },
+                {
+                    id: 1,
+                    title: 'Тохиргоо',
+                    icon: '&#xE8B8;',
+                    link: 'restricted.pages.settings'
                 }
             ]
     

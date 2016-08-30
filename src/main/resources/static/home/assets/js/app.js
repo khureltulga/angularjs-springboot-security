@@ -1,6 +1,6 @@
 ;
 "use strict";
-var app = angular.module('app', []);
+var app = angular.module('app', ['infinite-scroll']);
 
 app.controller('mainCtrl', function($scope, $window, $http){
 	$scope.size = 8;
@@ -31,15 +31,18 @@ app.controller('mainCtrl', function($scope, $window, $http){
 	}
 	
 	$scope.loadMore = function(){
-		$scope.page = $scope.page + 1;
-		$http.get('/api/applications?size='+$scope.size+'&page='+$scope.page+'&sort=id,desc').success(function(data) {
-			for(i=0;i<data.data.length;i++){
-				$scope.apps.push(data.data[i]);
-			}
-			$scope.total = data.total;
-		}).error(function(response) {
-			console.log(response);
-		});
+		if ($scope.total > $scope.apps.length){
+			$scope.page = $scope.page + 1;
+			$http.get('/api/applications?size='+$scope.size+'&page='+$scope.page+'&sort=id,desc').success(function(data) {
+				for(i=0;i<data.data.length;i++){
+					$scope.apps.push(data.data[i]);
+				}
+				$scope.total = data.total;
+			}).error(function(response) {
+				console.log(response);
+			});
+		}
+		
 	}
 
 });
