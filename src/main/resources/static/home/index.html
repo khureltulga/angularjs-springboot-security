@@ -1,222 +1,67 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html style="margin-top: 0 !important" class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html style="margin-top: 0 !important" class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html style="margin-top: 0 !important" class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <!--<![endif]-->
-<html style="margin-top: 0 !important" lang="en-US"> <!--<![endif]-->
+
+<html style="margin-top: 0 !important" lang="en-US" ng-app="app"
+	ng-controller="mainCtrl">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Нүүр хуудас</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,300italic' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=cyrillic-ext" rel="stylesheet">
-    <link rel="stylesheet" href="/home/assets/css/style.css" type="text/css" media="all" >
-    <link rel="stylesheet" href="/home/assets/css/responsive.css" type="text/css" media="all" >
-    <link rel="stylesheet" href="/home/assets/css/jquery.mCustomScrollbar.css" type="text/css" media="all" >
-   	<script src="/home/assets/js/jquery.js"></script>
-   	
-   	<script src="/admin/assets/js/angular_common.min.js"></script>
-   	<script src="/home/assets/js/app.js"></script>
-    <!--[if lt IE 9]>
-      <script src="/home/assets/js/html5shiv.js"></script>
-       <link href="/home/assets/css/ie.css" rel='stylesheet' type='text/css'>
-    <![endif]-->
-
-    <!--[if IE 7]>
-		<link rel="stylesheet" href="/home/assets/css/font-awesome-ie7.min.css">
-	<![endif]-->
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title ng-bind="settings.siteTitle">Нүүр хуудас</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=cyrillic-ext"
+	rel="stylesheet">
+<script src="/home/js/jquery.js"></script>
+<script src="/admin/assets/js/angular_common.min.js"></script>
+<script src="/home/js/app.js"></script>
+<link rel="stylesheet" href="/home/css/style.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="/home/js/ng-infinite-scroll.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 </head>
-<body data-spy="scroll" data-target=".navbar" ng-app="app" ng-controller="mainCtrl">
-<header id="header">
-	<div class="header-holder">
-
-		<div class="container hidden-phone">
-			<div class="row">
-				<div class="span1"></div>
-				<div class="span10" style="padding-top: 10px">
-					<div class="brow">
-						<div class="brick1">
-							<div class="nav-item" style="padding-top: 20px">
-								<img src="/home/assets/img/myimg/citylogo.png"/>
-							</div>
-						</div>
-						<div class="slogan brick3 transparent text-center">
-							<a href="/admin/" target="_blank" style="width: 100%;float: left;text-align: right;color: #5dbbf9;font-family: 'Roboto Condensed';text-transform: uppercase;">Системд нэвтрэх</a>
-							<div class="inner">
-								
-								<h2 style="font-family: 'Roboto Condensed';text-transform: uppercase;"><b>{{settings.siteTitle}}</b></h2>
-								<!-- <a href="#" style="color: black"> www.license.ulaanbaatar.mn</a> -->
-							</div>
-
-						</div>
+<body>
+	<header>
+		<div class="container" id="header">
+			<h3 ng-bind="settings.siteTitle"></h3>
+			<h5 ng-bind="settings.siteDescription"></h5>
+		</div>
+	</header>
+	<main>
+	<div class="container" style="padding-top: 30px;">
+		<div infinite-scroll="loadMore()" infinite-scroll-distance="1">
+			<div class="col-xs-12 col-md-6 col-lg-4" ng-repeat="app in apps">
+				<div class="list_item" ng-click="open(app.url)">
+					<div class="col-xs-12 col-md-4">
+						<div class="list_cover"
+							ng-style="{'background-image':'url({{app.image}})'}"></div>
 					</div>
-					<div class="brow">
-						<div class="slogan brick3 transparent text-right">
-							<div class="inner">
-								<h4>{{settings.siteDescription}}</h4>
-								<!-- <p>Та нийслэлийн "Иргэдэд нээлттэй цахим засаглал хөгжүүлэх" хөтөлбөрийн хүрээнд хийгдэж буй
-									<a href="#" style="color: #2d62a0"> НИЙСЛЭЛИЙН ТУСГАЙ ЗӨВШӨӨРЛИЙН ЦАХИМ СИСТЕМ </a> - ийг ашиглаж байна.</p> -->
-							</div>
-
-						</div>
-						<div class="brick1 thumb">
-							<div class="nav-item">
-								<img class="img1" src="/home/assets/img/myimg/img1.png" alt="">
-							</div>
-						</div>
+					<div class="col-xs-12 col-md-8">
+						<h5 class="list_detail" ng-bind="app.name"></h5>
 					</div>
-
-					<div class="brow" infinite-scroll="loadMore()" infinite-scroll-distance="1">
-						<div ng-attr-title="{{app.name}}" class="brick1" ng-repeat="app in apps" ng-class="{odd: $odd, even: $even}" ng-click="openPopup(app)" style="cursor:pointer">
-							<div class="nav-item">
-								<div class="nav-hover"></div>
-								
-								<i><img ng-src="{{app.image}}" style="max-width:40%;"></i>
-								<span>{{app.name}}</span>
-							</div>
-						</div>
-					</div>
-					<!-- <div class="brow"><center><button type="button" class="btn btn-default" style="margin-top:15px;" ng-click="loadMore()" ng-if="total > apps.length">Цааш</button></center></div> -->
-
 				</div>
-				<div class="span1"></div>
 			</div>
 		</div>
-
-		<div class="container visible-phone">
-			<div class="brick1">
-				<div class="nav-item" style="padding-top: 20px">
-					<img src="/home/assets/img/myimg/citylogo.png" style="width: 60%; "/>
-				</div>
-			</div>
-			<div class="slogan brick1 text-center odd">
-				<div class="inner">
-					<h3><b>{{settings.siteTitle}}</b></h3>
-					<a style="color: black"> {{settings.siteDescription}}</a>
-				</div>
-			</div>
-			
+	</div>
+	</main>
+	<footer>
+		<div class="container" id="footer">
+			<div class="footer_bottom row">
+				<i class="fa fa-phone" aria-hidden="true"></i> {{settings.tel}}
+				<i class="fa fa-envelope" aria-hidden="true" style="margin-left:15px;""></i> {{settings.email}}</div>
+			<div class="footer_bottom_dark row" ng-bind="settings.copyright">
+				{{settings.tel}} {{settings.email}}</div>
 		</div>
-	</div>
-</header> <!-- End header -->
-<div class="modal fade" id="appDetailModal" tabindex="-1" role="dialog" aria-labelledby="appDetailModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel" style="color: #fff;font-family: 'Roboto Condensed';">{{app.name}}</h4>
-      </div>
-      <div class="modal-body" style="white-space: pre-line;">
-      	<img ng-src="{{app.image}}" ng-if="app.image.length > 0" align="left" style="max-width:30%;margin-right: 15px;">
-       	<p ng-bind="app.description"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Хаах</button>
-        <button type="button" class="btn btn-primary" ng-click="open(app.url)">Зочлох</button>
-      </div>
-    </div>
-  </div>
-</div>
-<a href="#" id="btn_up">ДЭЭШ</a>
-<footer id="footer">
-	<div class="container">
-		{{settings.copyright}}
-		<span class="pull-right">
-			<span class="icon-phone"> {{settings.tel}} &nbsp;&nbsp;&nbsp; </span>
-			<span class="li_mail"> {{settings.email}}</span>
-		</span>
-
-	</div>
-</footer>
-<!-- Bootstrap js -->
-<script src="/home/assets/js/jquery-1.10.2.min.js"></script>
-<script src="/home/assets/js/jquery-ui-1.10.4.custom.min.js"></script>
-<script src="/home/assets/js/bootstrap-transition.js"></script>
-<script src="/home/assets/js/bootstrap-modal.js"></script>
-<script src="/home/assets/js/bootstrap-dropdown.js"></script>
-<script src="/home/assets/js/script.js"></script>
-<script src="/home/assets/js/bootstrap-carousel.js"></script>
-<script src="/home/assets/js/bootstrap-collapse.js"></script>
-<script src="/home/assets/js/bootstrap-scrollspy.js"></script>
-
-<script src="/home/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="/home/assets/js/jquery.mousewheel.min.js"></script>
-<script src="/home/assets/js/jquery.hoverdir.js"></script>
-<script src="/home/assets/js/jquery.isotope.min.js"></script>
-<script src="/home/assets/js/jquery.scrollUp.js"></script>
-<script src="/home/assets/js/main.js"></script>
-<script src="/home/assets/js/ng-infinite-scroll.min.js"></script>
-
-<script type="text/javascript">
-
-	+function ($) { "use strict";
-
-		/*
-		 * Carousel Caption Animation
-		 * -------------------------------------------------------------------------
-		 */
-		new $.CarouselAnimation('#carousel-medium');
-		/*
-		 * Slider Tabs
-		 * --------------------------------------------------------------
-		 */
-		new $.Slider({
-			widget  : '#slider-tabs',   // The widget ID
-			tab     : '#gallery'        // The tab ID
-		});
-
-		/*
-		 * HOVER DIRECTION AWARE
-		 * --------------------------------------------------------------
-		 */
-		$(' .da-thumbs > li ').each( function() { $(this).hoverdir({
-			hoverDelay : 75
-		}); } );
-
-		/*
-		 * Flickr Feed
-		 * --------------------------------------------------------------
-		 */
-		/* new $.FlickrFeed({
-			element : '#flickr-feed', // Your element id to place the photos.
-			items   : 9, // How many items do you want to show.
-			id      : '', // A single user ID. This specifies a user to fetch for. eg: '685365@N25'.
-			ids     : '', // A comma delimited list of user IDs. This specifies a list of users to fetch for.
-			tags    : '', // A comma delimited list of tags to filter the feed by.
-			tagmode : ''  // Control whether items must have ALL the tags (tagmode=all), or ANY (tagmode=any) of the tags. Default is ALL.
-		}); */
-
-		/* new $.FlickrFeed({
-			element : '#flickr-feed-aside', // Your element id to place the photos.
-			items   : 12, // How many items do you want to show.
-			id      : '', // A single user ID. This specifies a user to fetch for. eg: '685365@N25'.
-			ids     : '', // A comma delimited list of user IDs. This specifies a list of users to fetch for.
-			tags    : '', // A comma delimited list of tags to filter the feed by.
-			tagmode : ''  // Control whether items must have ALL the tags (tagmode=all), or ANY (tagmode=any) of the tags. Default is ALL.
-		}); */
-
-		/*
-		 * Nivo Lightbox
-		 * --------------------------------------------------------------
-		 */
-		$('#gallery a, .image a:has(.fa-search-plus)').nivoLightbox({
-			effect  : 'fadeScale'
-		});
-
-		/*
-		 * jQuery Marquee
-		 * --------------------------------------------------------------
-		 */
-		$('.breaking-news .content').marquee({
-			duplicated      : true,
-			duration        : 20000,
-			pauseOnHover    : true
-		});
-
-	} (jQuery);
-
-</script>
-
+	</footer>
 </body>
 </html>
