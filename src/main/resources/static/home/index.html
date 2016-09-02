@@ -22,20 +22,14 @@
 <link rel="stylesheet" href="/home/css/style.css">
 <link rel="stylesheet" href="/home/css/swiper.min.css">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	href="/home/css/font-awesome.min.css">
 <script src="/home/js/ng-infinite-scroll.min.js"></script>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+	href="/home/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
+	href="/home/css/bootstrap-theme.min.css">
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+	src="/home/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<header>
@@ -68,9 +62,9 @@
 	<footer>
 		<div class="container" id="footer">
 			<div class="footer_bottom row">
-				<i class="fa fa-phone" aria-hidden="true"></i> {{settings.tel}} <i
+				<i class="fa fa-phone" aria-hidden="true" ng-if="settings.tel.length > 0"></i> {{settings.tel}} <i
 					class="fa fa-envelope" aria-hidden="true"
-					style="margin-left: 15px;""></i> {{settings.email}}
+					style="margin-left: 15px;" ng-if="settings.email.length > 0"></i> {{settings.email}}
 			</div>
 			<div class="footer_bottom_dark row" ng-bind="settings.copyright">
 				{{settings.tel}} {{settings.email}}</div>
