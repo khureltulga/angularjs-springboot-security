@@ -1,6 +1,6 @@
 <div infinite-scroll="loadMore()" infinite-scroll-distance="1">
 	<div class="col-xs-12 col-md-6 col-lg-4" ng-repeat="app in apps">
-		<div class="list_item" ng-click="open(app.url)">
+		<div class="list_item" ng-click="open(app.url)" ng-attr-title="{{app.description}}">
 			<div class="col-xs-12 col-md-4">
 				<div class="list_cover"
 					ng-style="{'background-image':'url({{app.image}})'}"></div>
