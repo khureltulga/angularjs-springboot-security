@@ -5,7 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title ng-bind="settings.siteTitle">Нүүр хуудас</title>
-<link rel="icon" type="image/png" href="/admin/assets/img/logo_main_small.png" />
+<link rel="icon" type="image/png"
+	href="/admin/assets/img/logo_main_small.png" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <link
@@ -21,56 +22,57 @@
 
 <link rel="stylesheet" href="/home/css/style.css">
 <link rel="stylesheet" href="/home/css/swiper.min.css">
-<link rel="stylesheet"
-	href="/home/css/font-awesome.min.css">
+<link rel="stylesheet" href="/home/css/font-awesome.min.css">
 <script src="/home/js/ng-infinite-scroll.min.js"></script>
-<link rel="stylesheet"
-	href="/home/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/home/css/bootstrap-theme.min.css">
-<script
-	src="/home/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/home/css/bootstrap.min.css">
+<link rel="stylesheet" href="/home/css/bootstrap-theme.min.css">
+<script src="/home/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<header>
-		<div class="container nop" id="header">
-			<div class="col-xs-12 col-md-12 col-lg-7 nop" style="padding-right: 81px !important;">
-				<div class="list_cover"
-					ng-style="{'background-image':'url({{settings.logo}})'}" style="width: 75px;padding-bottom: 75px;margin-top: 3px;height: 75px;margin-left: 5px;background-size: contain !important;" ng-if="settings.logo.length > 0"></div>
-				<h3 class="truncate" ng-bind="settings.siteTitle"></h3>
-			</div> 
-			<div class="col-xs-12 col-md-12 col-lg-5 nop" id="header_menu">
-				<ul id="top_menu">
-					<li><a href="/#/">Эхлэл</a></li>
-					<li><a href="/#/about/">Танилцуулга</a></li>
-				</ul>
-			</div> 
+		<div class="container_fluid nop" id="header">
+			<div id="absolute_menu">
+				<div class="col-xs-12 col-md-12 col-lg-7 nop"
+					style="padding-right: 81px !important;">
+					<div class="list_cover"
+						ng-style="{'background-image':'url({{settings.logo}})'}"
+						style="width: 75px; padding-bottom: 75px; margin-top: 3px; height: 75px; margin-left: 5px;background-color: #fff; background-size: contain !important;border-radius: 50%;"
+						ng-if="settings.logo.length > 0"></div>
+					<h3 class="truncate" ng-bind="settings.siteTitle"></h3>
+				</div>
+				<div class="col-xs-12 col-md-12 col-lg-5 nop" id="header_menu">
+					<ul id="top_menu">
+						<li><a href="/#/about/">Танилцуулга</a></li>
+						<li><a href="/#/">Эхлэл</a></li>
+					</ul>
+				</div>
+			</div>
+			<ks-swiper-container loop="true" show-nav-buttons="false"
+				slides-per-view="1" space-between="0" pagination-clickable="false"
+				autoplay="5000"> <ks-swiper-slide
+				class="swiper-slide" ng-repeat="s in settings.slider_items">
+			<div class="slider_item" ng-style="{'background-image':'url({{s}})'}"></div>
+			</ks-swiper-slide> </ks-swiper-container>
 		</div>
 	</header>
 	<main>
-	<div class="container" style="padding:0px;">
-		<ks-swiper-container loop="true" show-nav-buttons="true" slides-per-view="1" space-between="0" pagination-clickable="false" autoplay="5000">
-		    <ks-swiper-slide class="swiper-slide" ng-repeat="s in settings.slider_items">
-		        <div class="slider_item" ng-style="{'background-image':'url({{s}})'}"></div>
-		    </ks-swiper-slide>
-		</ks-swiper-container>
-	</div>
-	<div ng-view class="container" style="padding-top:30px;">
-		
-	</div>
+	<div ng-view class="container"
+		style="padding-top: 30px; background-color: #ecf0f1;"></div>
 	</main>
 	<footer>
-		<div class="container" id="footer">
-			<div class="footer_bottom row">
-				<i class="fa fa-phone" aria-hidden="true" ng-if="settings.tel.length > 0"></i> {{settings.tel}} <i
-					class="fa fa-envelope" aria-hidden="true"
-					style="margin-left: 15px;" ng-if="settings.email.length > 0"></i> {{settings.email}}
+		<div class="container_fluid" id="footer">
+			<div class="container">
+				<div class="col-xs-12 col-md-6">
+					<span ng-bind="settings.copyright"></span>
+				</div>
+				<div class="col-xs-12 col-md-6" style="text-align: right;">
+					<i class="fa fa-phone" aria-hidden="true" ng-if="settings.tel.length > 0"></i> {{settings.tel}}
+					<br>
+					<i class="fa fa-envelope" aria-hidden="true" ng-if="settings.email.length > 0"></i>
+					{{settings.email}}
+				</div>
 			</div>
-			<div class="footer_bottom_dark row" ng-bind="settings.copyright">
-				{{settings.tel}} {{settings.email}}</div>
 		</div>
-		<div class="container" style="margin-bottom:15px;text-align: center;background: transparent;font-family: 'Roboto Condensed', sans-serif;color: #fff;padding-top: 15px;">
-			Смарт Грийн Технологи ХХК © 2016 он</div>
 	</footer>
 </body>
 </html>
