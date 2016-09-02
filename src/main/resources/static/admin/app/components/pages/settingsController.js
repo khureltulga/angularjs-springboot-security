@@ -8,6 +8,9 @@ angular
 	                            	 $scope.init = function(){
 	                            		 $http.get('/api/get_configs').success(function(data) {
 	                            			 $scope.site_settings = data;
+	                            			 if ($scope.site_settings.slider_items == null || $scope.site_settings.slider_items == undefined){
+	                            				 $scope.site_settings.slider_items = [];
+	                            			 }
 	                            		 }).error(function(response) {
 	                            			 console.log(response);
 	                            		 });
@@ -24,6 +27,37 @@ angular
 	                            		 });
 	                            		 //UIkit.modal.alert('<p>Site settings:</p><pre>' + data + '</pre>');
 	                            	 }
+	                            	 
+	                            	 $("#image_chooser_selector").kendoUpload({
+							                async: {
+							                    saveUrl: "/api/upload_image",
+							                    removeUrl: "remove",
+							                    autoUpload: true
+							                },
+							                multiple: false,
+							                showFileList: false,
+							                success: function(e){
+							                	$scope.site_settings.logo = e.response.result;
+							                }
+							            });
+	                            	 
+	                            	 $scope.removeSliderItem = function(index){
+	                            		 $scope.site_settings.slider_items.splice(index,1);
+	                            	 }
+	                            	 
+	                            	 $("#slider_image_add").kendoUpload({
+							                async: {
+							                    saveUrl: "/api/upload_image",
+							                    removeUrl: "remove",
+							                    autoUpload: true
+							                },
+							                multiple: false,
+							                showFileList: false,
+							                success: function(e){
+							                	console.log($scope.site_settings);
+							                	$scope.site_settings.slider_items.push(e.response.result);
+							                }
+							            });
                             	 }
                             	 else{
                             		 $state.go('login');

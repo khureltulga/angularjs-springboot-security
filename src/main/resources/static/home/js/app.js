@@ -1,6 +1,6 @@
 ;
 "use strict";
-var app = angular.module('app', ['infinite-scroll']);
+var app = angular.module('app', ['infinite-scroll','ngRoute','ksSwiper']);
 
 app.controller('mainCtrl', function($scope, $window, $http){
 	$scope.size = 8;
@@ -49,4 +49,17 @@ app.controller('mainCtrl', function($scope, $window, $http){
 		return "style" + (Math.floor(Math.random() * (6 - 1 + 1)) + 1);
 	}
 
+});
+
+app.config(function($routeProvider){
+	$routeProvider
+	.when('/',{
+		templateUrl: '/home/layouts/index.html'
+	})
+	.when('/about',{
+		templateUrl: '/home/layouts/about.html'
+	})
+	.otherwise(
+			{ redirectTo: '/'}
+	);
 });

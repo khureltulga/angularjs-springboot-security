@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		//auth.inMemoryAuthentication().withUser("admin").password("123456").roles("SUPER");
+		auth.inMemoryAuthentication().withUser("sgtadmin").password("smartgreentech_!").roles("ADMIN");
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
      

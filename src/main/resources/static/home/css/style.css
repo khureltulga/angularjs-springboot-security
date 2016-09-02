@@ -62,15 +62,16 @@ body {
 	background: #fff;
 	color: #34495e;
 	font-family: "Roboto Condensed";
-	border-bottom: 3px solid #ecf0f1;
+	/* border-bottom: 3px solid #ecf0f1; */
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	margin-top: 30px;
 	overflow: hidden;
+	height:81px;
 }
 
 #footer {
-	margin-bottom: 30px;
+	/* margin-bottom: 30px; */
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	overflow: hidden;
@@ -79,6 +80,10 @@ body {
 #header h3 {
 	text-transform: uppercase;
 	font-weight: bold;
+	padding-left: 15px;
+    line-height: 81px;
+    float: left;
+    margin: 0px;
 }
 
 .swiper-container {
@@ -94,4 +99,73 @@ body {
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
+}
+
+.nop{
+	padding:0px !important;
+}
+
+#top_menu{
+	display: inline;
+	padding:0px;
+}
+
+#top_menu li{
+	display: inline;
+}
+
+#top_menu li a{
+	color:#fff;
+	padding: 0px 15px;
+	line-height: 81px;
+	float:left;
+	text-decoration: none;
+	font-size: 1.5rem;
+	-webkit-transition: background 500ms ease;
+	-moz-transition: background 500ms ease;
+	-o-transition: background 500ms ease;
+	-ms-transition: background 500ms ease;
+	transition: background 500ms ease;
+	text-transform: uppercase;
+}
+
+#top_menu li a:hover{
+	background:#34495e;
+	
+}
+
+#header_menu{
+	background: #2c3e50;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#header_menu:before{
+	content:"";
+	width: 0;
+	height: 0;
+	position: absolute;
+    left: -81px;
+	border-style: solid;
+	border-width: 0 81px 81px 0;
+	border-color: transparent #2c3e50 transparent transparent;
+	line-height: 0px;
+	_border-color: #000000 #2c3e50 #000000 #000000;
+	_filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+}
+
+.section_title{
+	font-family: 'Roboto Condensed', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #34495e;
+}
+
+img.logo{
+	width:81px;
+	float:left;	
 }

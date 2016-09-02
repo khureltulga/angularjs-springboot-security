@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title ng-bind="settings.siteTitle">Нүүр хуудас</title>
+<link rel="icon" type="image/png" href="/admin/assets/img/logo_main_small.png" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <link
@@ -12,8 +13,12 @@
 	rel="stylesheet">
 <script src="/home/js/jquery.js"></script>
 <script src="/admin/assets/js/angular_common.min.js"></script>
+<script src="/home/js/angular-route.min.js"></script>
+<script src="/home/js/angular-resource.min.js"></script>
+<script src="/home/js/angular-swiper.js"></script>
 <script src="/home/js/app.js"></script>
 <script src="/home/js/swiper.min.js"></script>
+
 <link rel="stylesheet" href="/home/css/style.css">
 <link rel="stylesheet" href="/home/css/swiper.min.css">
 <link rel="stylesheet"
@@ -34,43 +39,30 @@
 </head>
 <body>
 	<header>
-		<div class="container" id="header">
-			<h3 ng-bind="settings.siteTitle"></h3>
-			<h5 ng-bind="settings.siteDescription"></h5>
+		<div class="container nop" id="header">
+			<div class="col-xs-12 col-md-12 col-lg-7 nop" style="padding-right: 81px !important;">
+				<div class="list_cover"
+					ng-style="{'background-image':'url({{settings.logo}})'}" style="width: 75px;padding-bottom: 75px;margin-top: 3px;height: 75px;margin-left: 5px;background-size: contain !important;" ng-if="settings.logo.length > 0"></div>
+				<h3 class="truncate" ng-bind="settings.siteTitle"></h3>
+			</div> 
+			<div class="col-xs-12 col-md-12 col-lg-5 nop" id="header_menu">
+				<ul id="top_menu">
+					<li><a href="/#/">Эхлэл</a></li>
+					<li><a href="/#/about/">Танилцуулга</a></li>
+				</ul>
+			</div> 
 		</div>
 	</header>
 	<main>
 	<div class="container" style="padding:0px;">
-		<div class="swiper-container">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide"><div class="slider_item" style="background-image: url(http://www.majesticgobitour.com/wp-content/uploads/2015/01/3.jpg)"></div></div>
-				<div class="swiper-slide"><div class="slider_item" style="background-image: url(http://www.toursmongolia.com/upload/pics/thumbs/b619a4c3d72a6582d85e07c4dbd50b1e.jpg)"></div></div>
-				<div class="swiper-slide"><div class="slider_item" style="background-image: url(https://drscdn.500px.org/photo/122207733/q%3D80_m%3D1500_k%3D1/2281aeb2f5c68a921f31fee2453e60da)"></div></div>
-			</div>
-			<!-- Add Pagination -->
-			<div class="swiper-pagination"></div>
-		</div>
-		<script>
-			var swiper = new Swiper('.swiper-container', {
-				pagination : '.swiper-pagination',
-				paginationClickable : true
-			});
-		</script>
+		<ks-swiper-container loop="true" show-nav-buttons="true" slides-per-view="1" space-between="0" pagination-clickable="false" autoplay="5000">
+		    <ks-swiper-slide class="swiper-slide" ng-repeat="s in settings.slider_items">
+		        <div class="slider_item" ng-style="{'background-image':'url({{s}})'}"></div>
+		    </ks-swiper-slide>
+		</ks-swiper-container>
 	</div>
-	<div class="container" style="padding-top:30px;">
-		<div infinite-scroll="loadMore()" infinite-scroll-distance="1">
-			<div class="col-xs-12 col-md-6 col-lg-4" ng-repeat="app in apps">
-				<div class="list_item" ng-click="open(app.url)">
-					<div class="col-xs-12 col-md-4">
-						<div class="list_cover"
-							ng-style="{'background-image':'url({{app.image}})'}"></div>
-					</div>
-					<div class="col-xs-12 col-md-8">
-						<h5 class="list_detail" ng-bind="app.name"></h5>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div ng-view class="container" style="padding-top:30px;">
+		
 	</div>
 	</main>
 	<footer>
@@ -83,6 +75,8 @@
 			<div class="footer_bottom_dark row" ng-bind="settings.copyright">
 				{{settings.tel}} {{settings.email}}</div>
 		</div>
+		<div class="container" style="margin-bottom:15px;text-align: center;background: transparent;font-family: 'Roboto Condensed', sans-serif;color: #fff;padding-top: 15px;">
+			Смарт Грийн Технологи ХХК © 2016 он</div>
 	</footer>
 </body>
 </html>

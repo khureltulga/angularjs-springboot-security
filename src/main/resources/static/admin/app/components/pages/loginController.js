@@ -52,6 +52,14 @@ angular
                         		  $event.preventDefault();
                         		  utils.card_show_hide($login_card,undefined,login_help_show,undefined);
                         	  };
+                        	  
+                        	  $scope.init = function(){
+                         		 $http.get('/api/get_configs').success(function(data) {
+                         			 $scope.site_settings = data;
+                         		 }).error(function(response) {
+                         			 console.log(response);
+                         		 });
+                         	 }
 
                         	  $scope.backToLogin = function($event) {
                         		  $event.preventDefault();
